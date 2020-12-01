@@ -1,0 +1,11 @@
+/usr/local/spark/python/lib/pyspark.zip/pyspark/context.py:220: DeprecationWarning: Support for Python 2 and Python 3 prior to version 3.6 is deprecated as of Spark 3.0. See also the plan for dropping Python 2 support at https://spark.apache.org/news/plan-for-dropping-python-2-support.html.
+  DeprecationWarning)
+match
+('pa', 1)
+('pa', 1)
+('pa', 1)
+('pa', 1)
+('pa', 1)
+('pa', 0)
+('pa', 1)
+('pa', 1)

@@ -1,0 +1,3 @@
+kill -9 $(ps -A | grep python | awk '{print $1}')
+python3 stream2.py
+spark-submit main.py > out.txt
