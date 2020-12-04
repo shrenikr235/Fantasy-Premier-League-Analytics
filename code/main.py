@@ -17,7 +17,7 @@ from pyspark.sql.functions import lit # for accessing pyspark,sql.Column methods
 
 
 # We take in the dataset paths for players and teams
-playercsv = os.path.join("..", "data", "play.csv")
+playercsv = os.path.join("..", "data", "players.csv")
 teamscsv = os.path.join("..", "data", "teams.csv")
 
 
