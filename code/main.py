@@ -198,7 +198,7 @@ def metCalc(rdd):
 
 				values=myDF2.collect()[0]
 				myDF3=metrdd.filter(metrdd.Id == theplayer)
-				metrics_values=myDF3.collect()[0]
+				metrVals=myDF3.collect()[0]
 				EID=data['eventId']
 				
 				# tag field
@@ -213,10 +213,10 @@ def metCalc(rdd):
 					AccKeyPassesCnt=values[17]
 					normPassesCnt=values[14]
 					keyPassesCnt=values[15]
-					MNormalPassCnt=metrics_values[3]
-					NumAccKeyPassCnt=metrics_values[4]
-					MNormPassCnt=metrics_values[1]
-					MKeyPassesCnt=metrics_values[2]
+					MNormalPassCnt=metrVals[3]
+					NumAccKeyPassCnt=metrVals[4]
+					MNormPassCnt=metrVals[1]
+					MKeyPassesCnt=metrVals[2]
 					
 					if 1801 in tf:
 						# accurate pass
@@ -262,7 +262,40 @@ def metCalc(rdd):
 				# EID == 2 -> foul
 				# EID == 3 -> free kick
 				# EID == 10 -> shot effectiveness
+
+				# duels
+				if EID == 1:
+					duelWinCnt = metrVals[6]
+					NoResCnt = metrVals[7]
+					totalDuels = metrVals[8]
+
+					if 701 in tf:
+						totalDuels += 1
+
+					elif 702 in tf:
+						# no real result
+						# neutral
+						NoResCnt += 1
+						totalDuels += 1
+					elif 703 in tf:
+						duelWinCnt += 1
+						totalDuels += 1
+
+					duelEffectivenessPM = retrieveDuelEffectiveness(duelWinCnt,NoResCnt,totalDuels)
 					
+					# for each match
+					metrdd=metrdd.withColumn("duelEffectiveness",F.when(F.col("Id")==theplayer,to_insert).otherwise(F.col("duelEffectiveness")))
+					metrdd=metrdd.withColumn("totalDuels",F.when(F.col("Id")==theplayer,totalDuels).otherwise(F.col("totalDuels")))
+					metrdd=metrdd.withColumn("neutralDuels",F.when(F.col("Id")==theplayer,NoResCnt).otherwise(F.col("neutralDuels")))
+					metrdd=metrdd.withColumn("duelsWon",F.when(F.col("Id")==theplayer,duelWinCnt).otherwise(F.col("duelsWon")))
+				
+
+
+
+
+
+
+
 				# checking metrics per match
 				# player profiles updated.
 
