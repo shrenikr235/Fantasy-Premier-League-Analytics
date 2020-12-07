@@ -289,13 +289,6 @@ def metCalc(rdd):
 					metrdd=metrdd.withColumn("neutralDuels",F.when(F.col("Id")==theplayer,NoResCnt).otherwise(F.col("neutralDuels")))
 					metrdd=metrdd.withColumn("duelsWon",F.when(F.col("Id")==theplayer,duelWinCnt).otherwise(F.col("duelsWon")))
 				
-
-
-
-
-
-
-
 				# checking metrics per match
 				# player profiles updated.
 
