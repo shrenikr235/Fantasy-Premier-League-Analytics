@@ -2,7 +2,6 @@
 # FPL Analytics
 
 The project is aimed at analyzing FPL data to rate and rank players, analyze match event data in real-time, compute team strengths and understand and predict player ratings using Apache Spark and its supporting libraries.
-Additional line of information text about what the project does. Your introduction should be around 2 or 3 sentences. Don't go overboard, people won't read it.
 
 ## Prerequisites
 
